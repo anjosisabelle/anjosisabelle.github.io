@@ -34,6 +34,7 @@ async function loadData() {
         }
         
         console.log('Data fetched successfully');
+        console.log('API Response:', data);
         const data = await response.json();
         return data.result.records;
     } catch (error) {
