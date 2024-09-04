@@ -1,0 +1,32 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    background-color: #2b2b2b;
+    color: #ffffff;
+}
+
+.navbar-brand {
+    font-weight: 700;
+    font-size: 1.5rem;
+}
+
+.card {
+    background-color: rgba(31, 31, 31, 0.8);
+    border: none;
+    border-radius: 8px;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+h1.display-4 {
+    color: #ffffff;
+}
+
+.navbar-nav .nav-link {
+    color: #ffffff;
+}
+
+.navbar-nav .nav-link:hover {
+    color: #cccccc;
+}
