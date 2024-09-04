@@ -1,0 +1,306 @@
+<!DOCTYPE html><html lang="pt"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard de Saúde Pública</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container-fluid">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showDashboard()">Início</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#" onclick="showContact()">Contato</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div id="content">
+            <div class="row mt-4 mb-4">
+                <div class="col-12 text-center">
+                    <h1 class="display-4">
+                        Dashboard de Tuberculose 
+                        <img src="https://assets.getsite.ai/66d7c6f63fb3131a86c0e7a1/uploaded-1725418324437.png" alt="Logo Goiás" style="height: 80px; vertical-align: middle;">
+                    </h1>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <label for="dataFilter">Filtro por Data:</label>
+                    <input type="date" id="dataFilter" class="form-control" />
+                </div>
+                <div class="col-md-4">
+                    <label for="regiaoFilter">Filtro por Região:</label>
+                    <select id="regiaoFilter" class="form-select">
+                        <option value="">Selecione a Região</option>
+                        <option value="norte">Norte</option>
+                        <option value="sul">Sul</option>
+                        <option value="leste">Leste</option>
+                        <option value="oeste">Oeste</option>
+                        <option value="centro">Centro</option>
+                    </select>
+                </div>
+                <div class="col-md-4">
+                    <label for="mortalidadeFilter">Filtro por Mortalidade:</label>
+                    <select id="mortalidadeFilter" class="form-select">
+                        <option value="">Selecione a Taxa de Mortalidade</option>
+                        <option value="alta">Alta</option>
+                        <option value="media">Média</option>
+                        <option value="baixa">Baixa</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="chart1" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="chart2" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="chart3" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-12 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <div id="chart4" style="width: 100%; height: 400px;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-4">
+                <div class="col-12 text-center">
+                    <img src="https://assets.getsite.ai/66d7c6f63fb3131a86c0e7a1/uploaded-1725418957803.png" alt="Logo Goiás" style="max-width: 400px; margin-top: 20px;">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.3.3/echarts.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+        function showDashboard() {
+            document.getElementById('content').innerHTML = `
+                <div class='row mt-4 mb-4'>
+                    <div class='col-12 text-center'>
+                        <h1 class='display-4'>
+                            Dashboard de Tuberculose 
+                            <img src='https://assets.getsite.ai/66d7c6f63fb3131a86c0e7a1/uploaded-1725418324437.png' alt='Logo Goiás' style='height: 80px; vertical-align: middle;'>
+                        </h1>
+                    </div>
+                </div>
+                <div class='row mb-4'>
+                    <div class='col-md-4'>
+                        <label for='dataFilter'>Filtro por Data:</label>
+                        <input type='date' id='dataFilter' class='form-control' />
+                    </div>
+                    <div class='col-md-4'>
+                        <label for='regiaoFilter'>Filtro por Região:</label>
+                        <select id='regiaoFilter' class='form-select'>
+                            <option value=''>Selecione a Região</option>
+                            <option value='norte'>Norte</option>
+                            <option value='sul'>Sul</option>
+                            <option value='leste'>Leste</option>
+                            <option value='oeste'>Oeste</option>
+                            <option value='centro'>Centro</option>
+                        </select>
+                    </div>
+                    <div class='col-md-4'>
+                        <label for='mortalidadeFilter'>Filtro por Mortalidade:</label>
+                        <select id='mortalidadeFilter' class='form-select'>
+                            <option value=''>Selecione a Taxa de Mortalidade</option>
+                            <option value='alta'>Alta</option>
+                            <option value='media'>Média</option>
+                            <option value='baixa'>Baixa</option>
+                        </select>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6 col-md-12 mb-4'>
+                        <div class='card'>
+                            <div class='card-body'>
+                                <div id='chart1' style='width: 100%; height: 400px;'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-6 col-md-12 mb-4'>
+                        <div class='card'>
+                            <div class='card-body'>
+                                <div id='chart2' style='width: 100%; height: 400px;'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row'>
+                    <div class='col-lg-6 col-md-12 mb-4'>
+                        <div class='card'>
+                            <div class='card-body'>
+                                <div id='chart3' style='width: 100%; height: 400px;'></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='col-lg-6 col-md-12 mb-4'>
+                        <div class='card'>
+                            <div class='card-body'>
+                                <div id='chart4' style='width: 100%; height: 400px;'></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row mb-4'>
+                    <div class='col-12 text-center'>
+                        <img src='https://assets.getsite.ai/66d7c6f63fb3131a86c0e7a1/uploaded-1725418957803.png' alt='Logo Goiás' style='max-width: 400px; margin-top: 20px;'>
+                    </div>
+                </div>
+            `;
+            renderCharts();
+        }
+
+        function showContact() {
+            document.getElementById('content').innerHTML = `
+                <div class='row mt-4 mb-4'>
+                    <div class='col-12 text-center'>
+                        <h1 class='display-4'>Contato</h1>
+                    </div>
+                </div>
+                <div class='row mb-4'>
+                    <div class='col-12 text-center'>
+                        <div class='card' style='background-color: rgba(31, 31, 31, 0.8);'>
+                            <div class='card-body' style='padding: 1.5rem;'>
+                                <p style='color: white; padding: 0 20%;'>Olá!</p>
+                                <p style='color: white; padding: 0 20%;'>Agradeço desde já a oportunidade de participar do processo seletivo. Estou ansiosa para discutir como minhas habilidades e experiências podem contribuir para o sucesso da equipe.</p>
+                                <p style='color: white; padding: 0 20%;'>Se você tiver alguma dúvida ou precisar de mais informações, por favor não hesite em entrar em contato comigo. Estou à disposição para responder a qualquer pergunta ou fornecer mais detalhes sobre meu perfil.</p>
+                                <p style='color: white; padding: 0 20%;'>E-mail: <a href='mailto:isabelle.anjos.pereira@gmail.com' style='color: white;'>isabelle.anjos.pereira@gmail.com</a></p>
+                                <p style='color: white; padding: 0 20%;'>LinkedIn: <a href='https://www.linkedin.com/in/isabelle-anjos-pereira' style='color: white;'>isabelle-anjos-pereira</a></p>
+                                <p style='color: white; padding: 0 20%;'>Telefone: <a href='tel:+5521965756362' style='color: white;'>(21) 96575-6362</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class='row mb-4'>
+                    <div class='col-12 text-center'>
+                        <img src='https://assets.getsite.ai/66d7c6f63fb3131a86c0e7a1/uploaded-1725418957803.png' alt='Logo Goiás' style='max-width: 400px; margin-top: 20px;'>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderCharts() {
+            var chart1 = echarts.init(document.getElementById('chart1'));
+            var chart2 = echarts.init(document.getElementById('chart2'));
+            var chart3 = echarts.init(document.getElementById('chart3'));
+            var chart4 = echarts.init(document.getElementById('chart4'));
+
+            var option1 = {
+                title: { text: 'Casos de Tuberculose por Ano', textStyle: { color: '#ffffff' } },
+                tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    data: ['2018', '2019', '2020', '2021', '2022']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: [820, 932, 901, 934, 1290],
+                    type: 'line',
+                    itemStyle: {
+                        color: '#4CAF50'
+                    }
+                }]
+            };
+
+            var option2 = {
+                title: { text: 'Taxa de Mortalidade', textStyle: { color: '#ffffff' } },
+                tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    data: ['2018', '2019', '2020', '2021', '2022']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: [150, 230, 224, 218, 135],
+                    type: 'bar',
+                    itemStyle: {
+                        color: '#66BB6A'
+                    }
+                }]
+            };
+
+            var option3 = {
+                title: { text: 'Distribuição por Região', textStyle: { color: '#ffffff' } },
+                tooltip: {},
+                series: [{
+                    name: 'Região',
+                    type: 'pie',
+                    radius: '50%',
+                    data: [
+                        { value: 1048, name: 'Norte', itemStyle: { color: '#A5D6A7' } },
+                        { value: 735, name: 'Sul', itemStyle: { color: '#81C784' } },
+                        { value: 580, name: 'Leste', itemStyle: { color: '#66BB6A' } },
+                        { value: 484, name: 'Oeste', itemStyle: { color: '#4CAF50' } },
+                        { value: 300, name: 'Centro', itemStyle: { color: '#388E3C' } }
+                    ],
+                }]
+            };
+
+            var option4 = {
+                title: { text: 'Comparação Anual', textStyle: { color: '#ffffff' } },
+                tooltip: {},
+                xAxis: {
+                    type: 'category',
+                    data: ['2018', '2019', '2020', '2021', '2022']
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series: [{
+                    data: [320, 432, 501, 334, 890],
+                    type: 'line',
+                    itemStyle: {
+                        color: '#388E3C'
+                    }
+                }]
+            };
+
+            chart1.setOption(option1);
+            chart2.setOption(option2);
+            chart3.setOption(option3);
+            chart4.setOption(option4);
+        }
+    </script>
+</body>
+</html>
