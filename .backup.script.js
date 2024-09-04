@@ -33,14 +33,7 @@ async function loadData() {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
         
-        console.log('Data fetched successfully');
-        const data = await response.json();
-        return data.result.records;
-    } catch (error) {
-        console.error('Error fetching data:', error);
-        return [];
-    }
-}
+        console.log('Data fetched suc
 
 async function showDashboard() {
     console.log('showDashboard function called');
